@@ -11,6 +11,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Navbar />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/quality" element={<Quality />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
+
       <Footer />
     </BrowserRouter>
   )

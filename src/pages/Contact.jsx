@@ -1,4 +1,4 @@
-import emailjs from "emailjs-com"
+import emailjs from "@emailjs/browser"
 import { useRef } from "react"
 
 export default function Contact() {
@@ -8,34 +8,78 @@ export default function Contact() {
     e.preventDefault()
 
     emailjs.sendForm(
-      "YOUR_SERVICE_ID",
-      "YOUR_TEMPLATE_ID",
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
       form.current,
-      "YOUR_PUBLIC_KEY"
-    ).then(
-      () => alert("Message sent successfully!"),
-      () => alert("Failed to send message")
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
     )
 
+    alert("Thank you! Your message has been sent.")
     e.target.reset()
   }
 
   return (
-    <div className="max-w-4xl mx-auto py-12">
-      <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
+    <section className="py-20 bg-gray-50">
+      <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+        
+        {/* LEFT */}
+        <div>
+          <h2 className="text-3xl font-bold mb-4">
+            Contact Choyal Industries
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Get in touch with us for quotations, partnerships, or technical
+            discussions. Our team will respond promptly.
+          </p>
 
-      <form ref={form} onSubmit={sendEmail} className="space-y-4">
-        <input name="name" placeholder="Your Name" required className="w-full p-2 border" />
-        <input name="email" placeholder="Your Email" required className="w-full p-2 border" />
-        <textarea name="message" placeholder="Your Message" required className="w-full p-2 border"></textarea>
-        <button className="bg-blue-900 text-white px-6 py-2 rounded">
-          Send Message
-        </button>
-      </form>
+          <div className="space-y-3 text-sm">
+            <p><strong>📍 Address:</strong> Faridabad, Haryana</p>
+            <p><strong>📞 Phone:</strong> +91 98110 18987</p>
+            <p><strong>📧 Email:</strong> pk_choyal@yahoo.in</p>
+          </div>
 
-      <a href="https://wa.me/919811018987" className="block mt-6 text-green-600">
-        Enquire on WhatsApp
-      </a>
-    </div>
+          <a
+            href="https://wa.me/919811018987"
+            className="inline-block mt-6 bg-green-600 text-white px-6 py-3 rounded"
+          >
+            WhatsApp Enquiry
+          </a>
+        </div>
+
+        {/* RIGHT */}
+        <form
+          ref={form}
+          onSubmit={sendEmail}
+          className="bg-white p-8 shadow rounded space-y-4"
+        >
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required
+            className="w-full border p-3 rounded"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            required
+            className="w-full border p-3 rounded"
+          />
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            rows="5"
+            required
+            className="w-full border p-3 rounded"
+          ></textarea>
+
+          <button className="w-full bg-[#0f2a44] text-white py-3 rounded font-semibold">
+            Send Message
+          </button>
+        </form>
+
+      </div>
+    </section>
   )
 }
